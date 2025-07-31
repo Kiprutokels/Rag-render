@@ -1,26 +1,44 @@
 require('dotenv').config();
 
+const port = process.env.PORT || 3000;
+const chromaHost = process.env.CHROMA_HOST || 'localhost';
+const chromaPort = process.env.CHROMA_PORT || 8000;
+
 module.exports = {
-  port: process.env.PORT || 3000,
+  // Server
+  port,
+
+  // Vector DB (Chroma)
+  chromaHost,
+  chromaPort,
+  chromaBaseUrl: `${chromaPort == 443 ? 'https' : 'http'}://${chromaHost}:${chromaPort}`,
+
+  // API Keys
   openaiApiKey: process.env.OPENAI_API_KEY,
   openrouterApiKey: process.env.OPENROUTER_API_KEY,
   huggingFaceApiKey: process.env.HUGGING_FACE_API_KEY,
-  chromaHost: process.env.CHROMA_HOST || 'localhost',
-  chromaPort: process.env.CHROMA_PORT || 8000,
+  jinaApiKey: process.env.JINA_API_KEY,
+
+  // Environment
   nodeEnv: process.env.NODE_ENV || 'development',
+
+  // File Upload
   uploadDir: process.env.UPLOAD_DIR || './uploads',
   maxFileSize: 10 * 1024 * 1024, // 10MB
   supportedFileTypes: ['.pdf', '.docx', '.txt', '.xlsx', '.csv'],
-  
-  // Jina AI Embeddings
-  embeddingModel: 'jina-embeddings-v2-base-en',
-  embeddingProvider: 'jinaai',
-  jinaApiKey: process.env.JINA_API_KEY,
 
-  // OpenAI embeddings
-  // embeddingModel: 'text-embedding-3-small',
-  // embeddingProvider: 'openai',
+  // Embeddings
+  embeddingModel: 'jina-embeddings-v2-base-en', // Change to 'text-embedding-3-small' for OpenAI
+  embeddingProvider: 'jinaai', // or 'openai'
 
+  // Chat Model
   chatModel: 'gpt-3.5-turbo',
-  collectionName: 'company_knowledge'
+
+  // Vector Collection
+  collectionName: 'company_knowledge',
 };
+
+// Optional warning if a required API key is missing
+if (!process.env.OPENROUTER_API_KEY) {
+  console.warn('⚠️  Missing OPENROUTER_API_KEY in .env');
+}
