@@ -4,7 +4,9 @@ const embeddingService = require('./embeddingService');
 
 class VectorService {
   constructor() {
-    this.client = new ChromaClient();
+    const protocol = config.chromaPort == 443 ? 'https' : 'http';
+    const baseUrl = `${protocol}://${config.chromaHost}:${config.chromaPort}`;
+    this.client = new ChromaClient({ baseUrl });
     this.collection = null;
     this.initialize();
   }
