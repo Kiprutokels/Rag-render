@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="header-content">
+                <i class="fas fa-robot"></i>
+                <div class="header-text">
+                    <h1>Company Assistant</h1>
+                    <p>Ask me anything about company policies and procedures</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p>Hello! I'm your company assistant. I have access to all company documents and policies. How can I help you today?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type your question here..." autocomplete="off">
+                <button id="sendButton">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="input-suggestions">
+                <button class="suggestion-btn" data-query="What are the office hours?">Office hours</button>
+                <button class="suggestion-btn" data-query="How do I apply for leave?">Apply for leave</button>
+                <button class="suggestion-btn" data-query="What is the dress code?">Dress code</button>
+                <button class="suggestion-btn" data-query="How do I contact HR?">Contact HR</button>
+            </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator" style="display: none;">
+            <div class="message bot-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

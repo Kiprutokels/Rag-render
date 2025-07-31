@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-cogs"></i> RAG System Admin Panel</h1>
+        </header>
+
+        <div class="dashboard">
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <h2><i class="fas fa-chart-bar"></i> System Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-file-alt"></i>
+                        <div class="stat-info">
+                            <h3 id="totalDocs">0</h3>
+                            <p>Total Documents</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-upload"></i>
+                        <div class="stat-info">
+                            <h3 id="todayUploads">0</h3>
+                            <p>Today's Uploads</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-file-pdf"></i>
+                        <div class="stat-info">
+                            <h3 id="pdfCount">0</h3>
+                            <p>PDF Files</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-file-word"></i>
+                        <div class="stat-info">
+                            <h3 id="docxCount">0</h3>
+                            <p>Word Documents</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Upload Documents</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept=".pdf,.docx,.txt,.xlsx,.csv" multiple style="display: none;">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag and drop files here or <span class="browse-link">browse</span></p>
+                        <small>Supported: PDF, DOCX, TXT, XLSX, CSV (Max 10MB each)</small>
+                    </div>
+                </div>
+                <div id="uploadProgress" class="upload-progress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p id="progressText">Uploading...</p>
+                </div>
+            </div>
+
+            <!-- Test Query Section -->
+            <div class="test-section">
+                <h2><i class="fas fa-search"></i> Test Query</h2>
+                <div class="test-query">
+                    <input type="text" id="testQuery" placeholder="Enter a test query to see how the system responds...">
+                    <button id="testBtn"><i class="fas fa-play"></i> Test</button>
+                </div>
+                <div id="testResults" class="test-results"></div>
+            </div>
+
+            <!-- Documents List -->
+            <div class="documents-section">
+                <h2><i class="fas fa-folder-open"></i> Uploaded Documents</h2>
+                <div id="documentsList" class="documents-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
