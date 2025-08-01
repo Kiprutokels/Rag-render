@@ -28,8 +28,8 @@ module.exports = {
   supportedFileTypes: ['.pdf', '.docx', '.txt', '.xlsx', '.csv'],
 
   // Embeddings
-  embeddingModel: 'jina-embeddings-v2-base-en', // Change to 'text-embedding-3-small' for OpenAI
-  embeddingProvider: 'jinaai', // or 'openai'
+  embeddingModel: 'jina-embeddings-v2-base-en', 
+  embeddingProvider: 'jinaai', //
 
   // Chat Model
   chatModel: 'gpt-3.5-turbo',
@@ -38,7 +38,6 @@ module.exports = {
   collectionName: 'company_knowledge',
 };
 
-// Optional warning if a required API key is missing
 if (!process.env.OPENROUTER_API_KEY) {
   console.warn('⚠️  Missing OPENROUTER_API_KEY in .env');
 }

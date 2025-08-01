@@ -4,9 +4,18 @@ const embeddingService = require('./embeddingService');
 
 class VectorService {
   constructor() {
-    const protocol = config.chromaPort == 443 ? 'https' : 'http';
-    const baseUrl = `${protocol}://${config.chromaHost}:${config.chromaPort}`;
-    this.client = new ChromaClient({ baseUrl });
+    // Build baseUrl without port for standard HTTPS/HTTP ports
+    let baseUrl;
+    if (config.chromaPort == 443) {
+      baseUrl = `https://${config.chromaHost}`;
+    } else if (config.chromaPort == 80) {
+      baseUrl = `http://${config.chromaHost}`;
+    } else {
+      const protocol = config.chromaPort == 443 ? 'https' : 'http';
+      baseUrl = `${protocol}://${config.chromaHost}:${config.chromaPort}`;
+    }
+    
+    this.client = new ChromaClient({ path: baseUrl });
     this.collection = null;
     this.initialize();
   }
@@ -36,7 +45,6 @@ class VectorService {
     }
   }
 
-  // Rest of the methods remain the same...
   async addDocuments(documents) {
     try {
       if (!this.collection) {
@@ -87,7 +95,7 @@ class VectorService {
       return results.documents[0].map((doc, index) => ({
         content: doc,
         metadata: results.metadatas[0][index],
-        similarity: 1 - results.distances[0][index] // Convert distance to similarity
+        similarity: 1 - results.distances[0][index]
       }));
     } catch (error) {
       console.error('Error searching similar documents:', error);
